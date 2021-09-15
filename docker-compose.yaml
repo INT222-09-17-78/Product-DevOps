@@ -14,6 +14,35 @@ services:
     ports:
       #running inside container
       - '3306'
-
+    networks:
+      product-network:
+        ipv4_address: 172.24.0.12
     volumes:
       - ./mysqldump:/docker-entrypoint-initdb.d/
+
+  backend:
+    depends_on:
+      - db
+    build:
+      context: ../Products-Backend/
+    restart: unless-stopped
+    # env_file: ./.env
+    expose:
+      - 5000
+    # environment:
+    #   - DB_HOST=db
+    #   - DB_USER=$USER
+    #   - DB_PASSWORD=$PASSWORD
+    #   - DB_NAME=$DB
+    #   - DB_PORT=$MYSQLDB_DOCKER_PORT
+    networks:
+      product-network:
+        ipv4_address: 172.24.0.11
+
+networks:
+  product-network:
+    # external: true
+    name: products-network
+    ipam:
+      config:
+        - subnet: 172.24.0.0/16
