@@ -5,9 +5,9 @@ services:
     restart: always
     env_file: ./.env.db
       
-    ports:
+    expose:
       #running inside container
-      - '3306'
+      - 3306
     networks:
       product-network:
         ipv4_address: 172.24.0.12
