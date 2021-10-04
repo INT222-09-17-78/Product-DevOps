@@ -36,7 +36,19 @@ services:
     networks:
       product-network:
         ipv4_address: 172.24.0.11
-
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ../Products-Frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "8080:80"
+    networks:
+      product-network:
+        ipv4_address: 172.24.0.10
 networks:
   product-network:
     # external: true
