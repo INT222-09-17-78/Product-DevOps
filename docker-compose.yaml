@@ -26,19 +26,19 @@ services:
     build:
       context: ../Products-Backend/
     restart: unless-stopped
-    # env_file: ./.env
+    env_file: ./.env
     expose:
       - 5000
-    environment:
-      - HOST=db
-      - USER=dbuser
-      - PASSWORD=helloDEV222_
-      - DB=mydb
-      - DIALECT=mysql
-      - POOL_MAX=5
-      - POOL_MIN=0
-      - POOL_ACCUIRE=30000
-      - POOL_IDLE=10000
+    # environment:
+    #   - HOST=db
+    #   - USER=dbuser
+    #   - PASSWORD=helloDEV222_
+    #   - DB=mydb
+    #   - DIALECT=mysql
+    #   - POOL_MAX=5
+    #   - POOL_MIN=0
+    #   - POOL_ACCUIRE=30000
+    #   - POOL_IDLE=10000
     networks:
       product-network:
         ipv4_address: 172.24.0.11
