@@ -17,10 +17,10 @@ services:
   backend:
     depends_on:
       - db
-    build:
-      context: ../Products-Backend/
-      container_name: "backend"
-      image: "backend"
+    
+      
+      
+    image: ghcr.io/int222-09-17-78/backend:1.0.0
     restart: unless-stopped
     env_file: ./.env.backend
     expose:
@@ -43,10 +43,10 @@ services:
     depends_on:
       - backend
     build:
-      context: ../Products-Frontend-Remake/
+      context: ../Products-Frontend/
       dockerfile: Dockerfile
-      container_name: "frontend"
-      image: "frontend"
+    image: frontend
+    container_name: frontend
     volumes:
       - ./src:/app/src
     ports:
