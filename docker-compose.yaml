@@ -16,12 +16,10 @@ services:
 
   backend:
     depends_on:
-      - db
-    
-      
-      
+      - db  
     image: ghcr.io/int222-09-17-78/backend:1.0.0
     restart: unless-stopped
+    container_name: backend
     env_file: ./.env.backend
     expose:
       - 5000
@@ -42,15 +40,14 @@ services:
   frontend:
     depends_on:
       - backend
-    build:
-      context: ../Products-Frontend/
-      dockerfile: Dockerfile
-    image: frontend
+    image: ghcr.io/int222-09-17-78/frontend:1.0.0
     container_name: frontend
     volumes:
       - ./src:/app/src
+      - /cer:/etc/ssl
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     networks:
       product-network:
         ipv4_address: 172.24.0.10
